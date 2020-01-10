@@ -18,6 +18,9 @@ import java.util.LinkedList;
 import java.util.ResourceBundle;
 
 public class WindowController implements Initializable {
+    public static final int LIST_ITEM_HEIGHT = 25;
+    public static final int LIST_WIDTH = 35;
+
     private final int columns = 15;
     private final int rows = 4;
     private final Mastermind game = new Mastermind(rows, columns);
@@ -34,6 +37,7 @@ public class WindowController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        masterColourBox.setVisible(game.isGameOver());
         SubmissionHandler.buildDialog(rows);
         buttonSubmit.setOnAction(new SubmissionHandler(rows, game));
         game.generateNew();
@@ -44,22 +48,32 @@ public class WindowController implements Initializable {
     private void prepareTableView() {
         for (int i = 0; i < rows; i++) {
             final ListView<ReflectiveImage> outputView = new ListView<>();
-            outputView.setCellFactory(new ColorCell());
+            outputView.setPrefWidth(LIST_WIDTH);
+            basicSetup(outputView);
             colorTables.add(outputView);
         }
-        resultTable.setCellFactory(new ColorCell());
+        resultTable.setPrefWidth((LIST_WIDTH * 4));
+        basicSetup(resultTable);
         tableSubmissions.getChildren().addAll(colorTables);
         tableSubmissions.getChildren().add(resultTable);
     }
 
+    private void basicSetup(ListView<ReflectiveImage> view) {
+        view.setFixedCellSize((LIST_ITEM_HEIGHT));
+        view.setCellFactory(new ColorCell());
+    }
+
     public void update(Result result, ColorField[] fields) {
+        masterColourBox.setVisible(game.isGameOver());
         buttonSubmit.setDisable(game.isGameOver());
         turnLabel.setText("Turn " + game.getTurn() + " of " + columns);
         ResultConverter converter = new ResultConverter(result);
         converter.write();
         for (int i = 0; i < colorTables.size(); i++) {
             colorTables.get(i).getItems().add(fields[i]);
+            colorTables.get(i).autosize();
         }
         resultTable.getItems().add(converter);
+        resultTable.autosize();
     }
 }
