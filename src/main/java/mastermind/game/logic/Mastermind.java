@@ -33,4 +33,8 @@ public class Mastermind {
         previousSubmissions.add(pins);
         return new Result(combination.toArray(new Pin[0]), pins);
     }
+
+    public boolean isGameOver() {
+        return columns == previousSubmissions.size();
+    }
 }
