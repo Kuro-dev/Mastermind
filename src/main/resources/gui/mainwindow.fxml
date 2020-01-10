@@ -3,7 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -22,12 +21,6 @@
                 </children>
              </VBox>
           </center>
-          <left>
-             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-          </left>
-          <right>
-             <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-          </right>
        </BorderPane>
     </top>
    <center>
@@ -44,6 +37,7 @@
             <Label fx:id="turnLabel" contentDisplay="CENTER" text="Turn" textAlignment="CENTER" />
             <Button fx:id="buttonSubmit" defaultButton="true" mnemonicParsing="false" text="New Submission" />
             <Label contentDisplay="CENTER" layoutX="15.0" layoutY="19.0" text="Tipp: Green = Full match, Black means right color but wrong position" textAlignment="CENTER" />
+            <Button layoutX="60.0" layoutY="15.0" mnemonicParsing="false" onAction="#buttonRestartOnAction" text="Restart" />
          </children>
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

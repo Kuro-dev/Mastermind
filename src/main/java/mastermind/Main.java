@@ -8,6 +8,7 @@ import mastermind.game.gui.WindowController;
 
 public class Main extends Application {
     private static WindowController mainWindow;
+
     public static void main(String[] args) {
         launch();
     }
@@ -22,6 +23,7 @@ public class Main extends Application {
         final Scene scene = new Scene(loader.load());
         mainWindow = loader.getController();
         stage.setScene(scene);
+        stage.setTitle("Mastermind");
         stage.show();
     }
 

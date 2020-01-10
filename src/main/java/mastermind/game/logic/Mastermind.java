@@ -27,6 +27,7 @@ public class Mastermind {
      * Generates a new random order
      */
     public void generateNew() {
+        gameOver = false;
         previousSubmissions.clear();
         combination.clear();
         for (int i = 0; i < rows; i++) {
@@ -71,4 +72,5 @@ public class Mastermind {
     public int getTurn() {
         return previousSubmissions.size();
     }
+
 }

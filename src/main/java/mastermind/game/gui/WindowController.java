@@ -37,13 +37,18 @@ public class WindowController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        initGame();
+    }
+
+    private void initGame() {
         masterColourBox.setVisible(game.isGameOver());
         SubmissionHandler.buildDialog(rows);
         buttonSubmit.setOnAction(new SubmissionHandler(rows, game));
         game.generateNew();
-        masterColourBox.getChildren().addAll(ColorField.parseFields(game.getCombination()));
+        masterColourBox.getChildren().setAll(ColorField.parseFields(game.getCombination()));
         prepareTableView();
     }
+
 
     private void prepareTableView() {
         for (int i = 0; i < rows; i++) {
@@ -75,5 +80,14 @@ public class WindowController implements Initializable {
         }
         resultTable.getItems().add(converter);
         resultTable.autosize();
+    }
+
+    @FXML
+    private void buttonRestartOnAction() {
+        game.generateNew();
+        colorTables.clear();
+        tableSubmissions.getChildren().clear();
+        resultTable.getItems().clear();
+        initGame();
     }
 }
