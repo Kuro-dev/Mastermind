@@ -7,6 +7,7 @@ public class Result {
     private final Pin[] comparePins;
     private int matchingColours = 0;
     private int matchingPins = 0;
+    private boolean totalMatch;
 
     /**
      * @param originalPins The original Pins of the masterMind
@@ -22,6 +23,7 @@ public class Result {
     }
 
     public void compare() {
+        totalMatch = true;
         for (int i = 0; i < originalPins.length; i++) {
             if (originalPins[i].equals(comparePins[i])) {
                 matchingPins++;
@@ -29,11 +31,16 @@ public class Result {
                 for (Pin pin : originalPins) {
                     if (comparePins[i].equals(pin)) {
                         matchingColours++;
+                        totalMatch = false;
                         break;
                     }
                 }
             }
         }
+    }
+
+    public boolean isTotalMatch() {
+        return totalMatch;
     }
 
     public int getMatchingPins() {

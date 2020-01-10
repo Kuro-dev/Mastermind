@@ -44,4 +44,24 @@ public class TestPinsMatch {
         result.compare();
         Assertions.assertEquals(2, result.getMatchingPins());
     }
+
+    @Test
+    public void resultIsTotalMatch() {
+        final Pin blue = new Pin(Color.BLUE);
+        final Pin black = new Pin(Color.BLACK);
+        final Pin red = new Pin(Color.RED);
+        final Pin white = new Pin(Color.WHITE);
+        final Pin[] originalPins = new Pin[]{blue, red, red, white};
+        final Pin[] comparePins = new Pin[]{blue, red, red, white};
+        final Result result = new Result(originalPins, comparePins);
+        result.compare();
+        Assertions.assertTrue(result.isTotalMatch());
+    }
+
+    @Test
+    public void resultIsNotATotalMatch() {
+        final Result result = getResult();
+        result.compare();
+        Assertions.assertFalse(result.isTotalMatch());
+    }
 }

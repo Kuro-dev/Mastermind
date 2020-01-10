@@ -9,6 +9,7 @@ public class Mastermind {
     private final int rows;
     private final int columns;
     private ArrayList<Pin> combination;
+    private ArrayList<Pin[]> previousSubmissions = new ArrayList<>();
 
     public Mastermind(int rows, int columns) {
         combination = new ArrayList<>(rows);
@@ -20,6 +21,7 @@ public class Mastermind {
      * Generates a new random order
      */
     public void generateNew() {
+        previousSubmissions.clear();
         combination.clear();
         for (int i = 0; i < rows; i++) {
             combination.add(i, new Pin());
@@ -28,6 +30,7 @@ public class Mastermind {
     }
 
     public Result submit(Pin... pins) {
+        previousSubmissions.add(pins);
         return new Result(combination.toArray(new Pin[0]), pins);
     }
 }
