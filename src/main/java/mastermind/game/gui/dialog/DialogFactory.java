@@ -11,6 +11,7 @@ import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import mastermind.game.color.ColorCell;
 import mastermind.game.color.ColorField;
+import mastermind.game.gui.resulthandling.ReflectiveImage;
 import mastermind.game.logic.pin.Color;
 import mastermind.game.logic.pin.Pin;
 
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 
 public class DialogFactory implements Callback<ButtonType, ColorField[]> {
     private final int rows;
-    private final ArrayList<ComboBox<ColorField>> comboBoxes = new ArrayList<>();
+    private final ArrayList<ComboBox<ReflectiveImage>> comboBoxes = new ArrayList<>();
 
     public DialogFactory(int rows) {
 
@@ -43,7 +44,7 @@ public class DialogFactory implements Callback<ButtonType, ColorField[]> {
         dialogPane.setContent(wrapper);
 
         for (int i = 0; i < rows; i++) {
-            final ComboBox<ColorField> comboBox = new ComboBox<>();
+            final ComboBox<ReflectiveImage> comboBox = new ComboBox<>();
             final ColorField[] fields = ColorField.parseFields(getPins(), 20, 20);
             final ColorCell factory = new ColorCell();
             comboBox.setCellFactory(factory);
@@ -62,8 +63,8 @@ public class DialogFactory implements Callback<ButtonType, ColorField[]> {
     public ColorField[] call(ButtonType buttonType) {
         if (buttonType == ButtonType.APPLY) {
             final ArrayList<ColorField> list = new ArrayList<>();
-            for (ComboBox<ColorField> box : comboBoxes) {
-                list.add(box.getSelectionModel().getSelectedItem());
+            for (ComboBox<ReflectiveImage> box : comboBoxes) {
+                list.add((ColorField) box.getSelectionModel().getSelectedItem());
             }
             return list.toArray(new ColorField[0]);
         } else {

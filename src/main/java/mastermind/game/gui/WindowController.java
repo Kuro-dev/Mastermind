@@ -4,33 +4,33 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.ImageView;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
+import mastermind.game.color.ColorCell;
 import mastermind.game.color.ColorField;
+import mastermind.game.gui.resulthandling.ReflectiveImage;
 import mastermind.game.gui.resulthandling.ResultConverter;
 import mastermind.game.logic.Mastermind;
 import mastermind.game.logic.check.Result;
 
 import java.net.URL;
+import java.util.LinkedList;
 import java.util.ResourceBundle;
 
 public class WindowController implements Initializable {
     private final int columns = 15;
     private final int rows = 4;
     private final Mastermind game = new Mastermind(rows, columns);
+    private final LinkedList<ListView<ReflectiveImage>> colorTables = new LinkedList<>();
+    private final ListView<ReflectiveImage> resultTable = new ListView<>();
     @FXML
     private Label turnLabel;
     @FXML
     private Button buttonSubmit;
     @FXML
-    private TableView<ColorField> tableSubmissions;
-    @FXML
-    private TableView<ResultConverter> tableResults;
-    @FXML
     private HBox masterColourBox;
+    @FXML
+    private HBox tableSubmissions;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -43,12 +43,13 @@ public class WindowController implements Initializable {
 
     private void prepareTableView() {
         for (int i = 0; i < rows; i++) {
-            TableColumn<ColorField, ImageView> column = new TableColumn<>();
-            column.setCellValueFactory(new PropertyValueFactory<>("imageView"));
-            tableSubmissions.getColumns().add(column);
+            final ListView<ReflectiveImage> outputView = new ListView<>();
+            outputView.setCellFactory(new ColorCell());
+            colorTables.add(outputView);
         }
-        TableColumn<ResultConverter, ImageView> column = new TableColumn<>();
-        tableResults.getColumns().add(new TableColumn<>("result"));
+        resultTable.setCellFactory(new ColorCell());
+        tableSubmissions.getChildren().addAll(colorTables);
+        tableSubmissions.getChildren().add(resultTable);
     }
 
     public void update(Result result, ColorField[] fields) {
@@ -56,7 +57,9 @@ public class WindowController implements Initializable {
         turnLabel.setText("Turn " + game.getTurn() + " of " + columns);
         ResultConverter converter = new ResultConverter(result);
         converter.write();
-        tableSubmissions.getItems().addAll(fields);
-        tableResults.getItems().add(converter);
+        for (int i = 0; i < colorTables.size(); i++) {
+            colorTables.get(i).getItems().add(fields[i]);
+        }
+        resultTable.getItems().add(converter);
     }
 }

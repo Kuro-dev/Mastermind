@@ -1,18 +1,19 @@
 package mastermind.game.gui.resulthandling;
 
-import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
+import mastermind.game.color.ColorCell;
 import mastermind.game.gui.resulthandling.exceptions.NoEmptySpaceException;
 import mastermind.game.logic.check.Result;
 
-public class ResultConverter {
-    private static final int SQUARE_SIZE = 2;
+public class ResultConverter extends ColorCell implements ReflectiveImage {
+    private static final int SQUARE_SIZE = 10;
     private final int matchingPins;
     private final int matchingColours;
 
-    private WritableImage image = new WritableImage(20, 20);
+    private WritableImage image = new WritableImage(25, 25);
 
     public ResultConverter(Result result) {
         matchingColours = result.getMatchingColours();
@@ -34,12 +35,14 @@ public class ResultConverter {
     }
 
     private void writePixel(Color color) {
-        final int[][] emptyPixel = findEmptyPixel();
+        final Coordinate emptyPixel = findEmptyPixel();
         PixelWriter writer = image.getPixelWriter();
-        final int x = emptyPixel[1][0];
-        final int y = emptyPixel[0][1];
-        for (int i = 0; i < SQUARE_SIZE; i++) {
-            writer.setColor((x + i), (y + i), color);
+        final int xStart = emptyPixel.getX();
+        final int yStart = emptyPixel.getY();
+        for (int x = 0; x < SQUARE_SIZE; x++) {
+            for (int y = 0; y < SQUARE_SIZE; y++) {
+                writer.setColor((xStart + x), (yStart + y), color);
+            }
         }
     }
 
@@ -48,16 +51,16 @@ public class ResultConverter {
      *
      * @return The coordinate of the top left pixel of the free space.
      */
-    private int[][] findEmptyPixel() {
+    private Coordinate findEmptyPixel() {
         int skipCount = 0;
-        for (int x = 0; x < image.getWidth(); x++) {
-            for (int y = 0; y < image.getHeight(); y++) {
-                if (image.getPixelReader().getColor(x, y).equals(Color.WHITE)) {
+        for (int y = 0; y < image.getHeight(); y++) {
+            for (int x = 0; x < image.getWidth(); x++) {
+                if (image.getPixelReader().getColor(x, y).equals(Color.TRANSPARENT)) {
                     if ((skipCount) < 2) {
                         skipCount++;
                         continue;
                     }
-                    return new int[x][y];
+                    return new Coordinate(x, y);
                 }
                 skipCount = 0;
             }
@@ -65,7 +68,8 @@ public class ResultConverter {
         throw new NoEmptySpaceException("cant find empty pixels");
     }
 
-    public ImageView getImageView() {
-        return new ImageView(image);
+    @Override
+    public Image getImage() {
+        return image;
     }
 }

@@ -4,12 +4,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
+import mastermind.game.gui.resulthandling.ReflectiveImage;
 import mastermind.game.logic.pin.Pin;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-public class ColorField {
+public class ColorField implements ReflectiveImage {
     private final Pin pin;
     private final int width;
     private final int height;
@@ -60,9 +61,6 @@ public class ColorField {
             }
         }
         return image;
-    }
-    public ImageView getImageView(){
-        return new ImageView(getImage());
     }
 
     @Override

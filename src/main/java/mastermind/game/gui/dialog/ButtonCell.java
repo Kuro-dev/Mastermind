@@ -5,8 +5,9 @@ import javafx.scene.control.ListCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import mastermind.game.color.ColorField;
+import mastermind.game.gui.resulthandling.ReflectiveImage;
 
-public class ButtonCell extends ListCell<ColorField> {
+public class ButtonCell extends ListCell<ReflectiveImage> {
     private ColorField selectedItem;
 
     @Override
@@ -14,13 +15,8 @@ public class ButtonCell extends ListCell<ColorField> {
         return new ImageView(selectedItem.getImage());
     }
 
-    public void setNode(ColorField selectedItem) {
-
-        this.selectedItem = selectedItem;
-    }
-
     @Override
-    protected void updateItem(ColorField item, boolean btl) {
+    protected void updateItem(ReflectiveImage item, boolean btl) {
         super.updateItem(item, btl);
         if (item != null) {
             Image img = item.getImage();
