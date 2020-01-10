@@ -28,6 +28,8 @@ public class WindowController implements Initializable {
     @FXML
     private TableView<ColorField> tableSubmissions;
     @FXML
+    private TableView<ResultConverter> tableResults;
+    @FXML
     private HBox masterColourBox;
 
     @Override
@@ -46,11 +48,15 @@ public class WindowController implements Initializable {
             tableSubmissions.getColumns().add(column);
         }
         TableColumn<ResultConverter, ImageView> column = new TableColumn<>();
-        tableSubmissions.getColumns().add(new TableColumn<>("result"));
+        tableResults.getColumns().add(new TableColumn<>("result"));
     }
 
     public void update(Result result, ColorField[] fields) {
         buttonSubmit.setDisable(game.isGameOver());
         turnLabel.setText("Turn " + game.getTurn() + " of " + columns);
+        ResultConverter converter = new ResultConverter(result);
+        converter.write();
+        tableSubmissions.getItems().addAll(fields);
+        tableResults.getItems().add(converter);
     }
 }
