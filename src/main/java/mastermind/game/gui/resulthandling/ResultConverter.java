@@ -30,6 +30,7 @@ public class ResultConverter {
         }
     }
 
+    //TODO implement this
     private void writePixel(Color color) {
         final PixelWriter writer = image.getPixelWriter();
         final PixelReader reader = image.getPixelReader();
@@ -38,9 +39,14 @@ public class ResultConverter {
     }
 
     private int[][] findEmptyPixel() {
+        int skipCount = 0;
         for (int x = 0; x < image.getWidth(); x++) {
             for (int y = 0; y < image.getHeight(); y++) {
                 if (image.getPixelReader().getColor(x, y).equals(Color.WHITE)) {
+                    if ((skipCount) < 2) {
+                        skipCount++;
+                        continue;
+                    }
                     return new int[x][y];
                 }
             }
