@@ -9,11 +9,11 @@ import mastermind.game.gui.resulthandling.exceptions.NoEmptySpaceException;
 import mastermind.game.logic.check.Result;
 
 public class ResultConverter extends ColorCell implements ReflectiveImage {
-    private static final int SQUARE_SIZE = 10;
+    private static final int SQUARE_SIZE = 20;
     private final int matchingPins;
     private final int matchingColours;
 
-    private WritableImage image = new WritableImage(25, 25);
+    private WritableImage image = new WritableImage(100, SQUARE_SIZE);
 
     public ResultConverter(Result result) {
         matchingColours = result.getMatchingColours();
