@@ -63,8 +63,9 @@ public class Mastermind {
         return gameOver;
     }
 
-    public void setGameOver(boolean gameOver) {
+    public void setGameOver(boolean gameOver, String message) {
         this.gameOver = gameOver;
+        System.out.println(message);
     }
 
     public int getTurn() {

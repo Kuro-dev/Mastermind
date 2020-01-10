@@ -38,7 +38,8 @@ public class SubmissionHandler implements EventHandler<ActionEvent> {
             Result result = game.submit(fields);
             result.compare();
             if (result.isTotalMatch()) {
-                game.setGameOver(true);
+                game.setGameOver(true,"you won!");
+                Main.getMainWindow().update(result,fields);
             } else {
                 Main.getMainWindow().update(result,fields);
             }
