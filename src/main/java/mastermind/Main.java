@@ -1,13 +1,20 @@
 package mastermind;
 
-import mastermind.game.logic.Mastermind;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-public class Main {
+public class Main extends Application {
     public static void main(String[] args) {
-        final Mastermind game = new Mastermind(4, 15);
-        for (int i = 0; i < 10; i++) {
-            game.generateNew();
-        }
+        launch();
+    }
 
+    @Override
+    public void start(Stage stage) throws Exception {
+        final FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/mainwindow.fxml"));
+        final Scene scene = new Scene(loader.load());
+        stage.setScene(scene);
+        stage.show();
     }
 }
