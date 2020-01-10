@@ -28,10 +28,10 @@ public class Result {
             if (originalPins[i].equals(comparePins[i])) {
                 matchingPins++;
             } else {
+                totalMatch = false;
                 for (Pin pin : originalPins) {
                     if (comparePins[i].equals(pin)) {
                         matchingColours++;
-                        totalMatch = false;
                         break;
                     }
                 }
