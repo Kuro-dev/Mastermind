@@ -19,7 +19,7 @@ import java.util.ResourceBundle;
 
 public class WindowController implements Initializable {
     private static final int LIST_ITEM_HEIGHT = 25;
-    private static final int LIST_WIDTH = 35;
+    private static final int LIST_WIDTH = 40;
 
     private final int columns = 15;
     private final int rows = 4;

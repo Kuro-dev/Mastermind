@@ -17,7 +17,7 @@
              <VBox alignment="CENTER">
                 <children>
                    <Label text="Solution" />
-                   <HBox fx:id="masterColourBox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" />
+                   <HBox fx:id="masterColourBox" alignment="CENTER" spacing="10.0" />
                 </children>
              </VBox>
           </center>
