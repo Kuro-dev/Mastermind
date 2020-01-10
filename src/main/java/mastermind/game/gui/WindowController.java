@@ -2,7 +2,9 @@ package mastermind.game.gui;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import mastermind.game.color.ColorField;
@@ -20,12 +22,6 @@ public class WindowController implements Initializable {
     @FXML
     private TableView<ImageView> tableSubmissions;
     @FXML
-    private HBox submissionField;
-    @FXML
-    private ListView<Label> listTurnCount;
-    @FXML
-    private ListView listResults;
-    @FXML
     private HBox masterColourBox;
 
     @Override
@@ -33,10 +29,10 @@ public class WindowController implements Initializable {
         buttonSubmit.setOnAction(new SubmissionHandler());
         game.generateNew();
         masterColourBox.getChildren().addAll(ColorField.parseFields(game.getCombination()));
-        prepareStage();
+        prepareTableView();
     }
 
-    private void prepareStage() {
+    private void prepareTableView() {
         tableSubmissions.getColumns().add(new TableColumn<>("Turn"));
         for (int i = 0; i < rows; i++) {
             tableSubmissions.getColumns().add(new TableColumn<ImageView, String>("color " + i));
