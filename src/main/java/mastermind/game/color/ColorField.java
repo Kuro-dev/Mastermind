@@ -45,6 +45,7 @@ public class ColorField {
     public Pin getPin() {
         return pin;
     }
+
     public Image getImage() {
         final Color color = Color.valueOf(pin.getColor());
         for (int x = 0; x < width; x++) {
@@ -59,6 +60,9 @@ public class ColorField {
             }
         }
         return image;
+    }
+    public ImageView getImageView(){
+        return new ImageView(getImage());
     }
 
     @Override
