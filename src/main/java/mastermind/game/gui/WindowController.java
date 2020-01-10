@@ -26,7 +26,8 @@ public class WindowController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        buttonSubmit.setOnAction(new SubmissionHandler());
+        SubmissionHandler.buildDialog(rows);
+        buttonSubmit.setOnAction(new SubmissionHandler(rows));
         game.generateNew();
         masterColourBox.getChildren().addAll(ColorField.parseFields(game.getCombination()));
         prepareTableView();
