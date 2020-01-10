@@ -2,6 +2,8 @@ package mastermind.game.logic.check;
 
 import mastermind.game.logic.pin.Pin;
 
+import java.util.ArrayList;
+
 public class Result {
     private final Pin[] originalPins;
     private final Pin[] comparePins;
@@ -23,20 +25,28 @@ public class Result {
     }
 
     public void compare() {
+        final ArrayList<Pin> matchedPins = new ArrayList<>();
+        final ArrayList<Pin> matchedColors = new ArrayList<>();
         totalMatch = true;
         for (int i = 0; i < originalPins.length; i++) {
             if (originalPins[i].equals(comparePins[i])) {
+                matchedPins.add(originalPins[i]);
                 matchingPins++;
             } else {
                 totalMatch = false;
                 for (Pin pin : originalPins) {
-                    if (comparePins[i].equals(pin)) {
+                    if (comparePins[i].equals(pin) && colorWasNotMatchedBefore(comparePins[i], matchedColors)&& !matchedPins.contains(pin)) {
+                        matchedColors.add(pin);
                         matchingColours++;
                         break;
                     }
                 }
             }
         }
+    }
+
+    private boolean colorWasNotMatchedBefore(Pin comparePin, ArrayList<Pin> matchedColors) {
+        return matchedColors.stream().noneMatch(pin -> pin.getColor().matches(comparePin.getColor()));
     }
 
     public boolean isTotalMatch() {

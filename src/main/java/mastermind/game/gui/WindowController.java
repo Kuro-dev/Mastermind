@@ -57,7 +57,7 @@ public class WindowController implements Initializable {
             basicSetup(outputView);
             colorTables.add(outputView);
         }
-        resultTable.setPrefWidth((LIST_WIDTH * 4));
+        resultTable.setPrefWidth((LIST_WIDTH * 3));
         basicSetup(resultTable);
         tableSubmissions.getChildren().addAll(colorTables);
         tableSubmissions.getChildren().add(resultTable);
