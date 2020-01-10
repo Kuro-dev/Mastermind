@@ -17,6 +17,10 @@ public class Mastermind {
         this.columns = columns;
     }
 
+    public ArrayList<Pin> getCombination() {
+        return combination;
+    }
+
     /**
      * Generates a new random order
      */
