@@ -18,8 +18,8 @@ import java.util.LinkedList;
 import java.util.ResourceBundle;
 
 public class WindowController implements Initializable {
-    public static final int LIST_ITEM_HEIGHT = 25;
-    public static final int LIST_WIDTH = 35;
+    private static final int LIST_ITEM_HEIGHT = 25;
+    private static final int LIST_WIDTH = 35;
 
     private final int columns = 15;
     private final int rows = 4;
