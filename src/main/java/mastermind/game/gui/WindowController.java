@@ -84,7 +84,7 @@ public class WindowController implements Initializable {
 
     @FXML
     private void buttonRestartOnAction() {
-        game.generateNew();
+        buttonSubmit.setDisable(false);
         colorTables.clear();
         tableSubmissions.getChildren().clear();
         resultTable.getItems().clear();
