@@ -6,6 +6,7 @@ public enum Color {
     WHITE,
     BLACK,
     BLUE,
+    YELLOW,
     RED;
 
     static Color getRandom() {
