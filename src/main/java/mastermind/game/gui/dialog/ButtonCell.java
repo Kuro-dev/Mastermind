@@ -11,11 +11,6 @@ public class ButtonCell extends ListCell<ReflectiveImage> {
     private ColorField selectedItem;
 
     @Override
-    public Node getStyleableNode() {
-        return new ImageView(selectedItem.getImage());
-    }
-
-    @Override
     protected void updateItem(ReflectiveImage item, boolean btl) {
         super.updateItem(item, btl);
         if (item != null) {

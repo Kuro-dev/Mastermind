@@ -10,7 +10,8 @@ public class ColorCell extends ListCell<ReflectiveImage> implements Callback<Lis
 
     @Override
     public ListCell<ReflectiveImage> call(ListView<ReflectiveImage> colorFieldListView) {
-        return new ListCell<>() {
+        return new ListCell<ReflectiveImage>() {
+
             @Override
             protected void updateItem(ReflectiveImage item, boolean empty) {
                 super.updateItem(item, empty);
