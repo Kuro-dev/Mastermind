@@ -37,9 +37,13 @@ public class WindowController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        initGame();
+    }
+
+    private void initGame() {
         masterColourBox.setVisible(game.isGameOver());
         SubmissionHandler.buildDialog(rows);
-        buttonSubmit.setOnAction(new SubmissionHandler(rows, game));
+        buttonSubmit.setOnAction(new SubmissionHandler(game));
         game.generateNew();
         masterColourBox.getChildren().setAll(ColorField.parseFields(game.getCombination()));
         prepareTableView();
@@ -63,6 +67,12 @@ public class WindowController implements Initializable {
         view.setCellFactory(new ColorCell());
     }
 
+    /**
+     * Updates the GUI for one turn cycle.
+     *
+     * @param result The result of the submission.
+     * @param fields The colorFields of the submission.
+     */
     public void update(Result result, ColorField[] fields) {
         masterColourBox.setVisible(game.isGameOver());
         buttonSubmit.setDisable(game.isGameOver());

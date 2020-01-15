@@ -6,6 +6,10 @@ import mastermind.game.logic.pin.Pin;
 
 import java.util.ArrayList;
 
+/**
+ * The actual game. Instantiate this and invoke the {@link #generateNew()} to initialize a new game
+ * with randomized pins.
+ */
 public class Mastermind {
     private final int rows;
     private final int columns;
@@ -49,6 +53,9 @@ public class Mastermind {
         return new Result(combination.toArray(new Pin[0]), pins);
     }
 
+    /**
+     * @see #submit(Pin...)
+     */
     public Result submit(ColorField... fields) {
         ArrayList<Pin> list = new ArrayList<>();
         for (ColorField field : fields) {

@@ -16,11 +16,9 @@ import java.util.Optional;
  */
 public class SubmissionHandler implements EventHandler<ActionEvent> {
     private static final Dialog<ColorField[]> dialog = new Dialog<>();
-    private int rows;
     private final Mastermind game;
 
-    public SubmissionHandler(int rows, Mastermind game) {
-        this.rows = rows;
+    public SubmissionHandler(Mastermind game) {
         this.game = game;
     }
 
@@ -38,11 +36,9 @@ public class SubmissionHandler implements EventHandler<ActionEvent> {
             Result result = game.submit(fields);
             result.compare();
             if (result.isTotalMatch()) {
-                game.setGameOver(true,"you won!");
-                Main.getMainWindow().update(result,fields);
-            } else {
-                Main.getMainWindow().update(result,fields);
+                game.setGameOver(true, "you won!");
             }
+            Main.getMainWindow().update(result, fields);
         });
     }
 }
