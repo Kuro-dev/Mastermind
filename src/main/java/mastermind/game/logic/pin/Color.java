@@ -2,6 +2,9 @@ package mastermind.game.logic.pin;
 
 import java.util.Random;
 
+/**
+ * Collection of all possible colours used within the game and shown in the GUI
+ */
 public enum Color {
     WHITE,
     BLACK,
