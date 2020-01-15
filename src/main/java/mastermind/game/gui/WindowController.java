@@ -17,6 +17,9 @@ import java.net.URL;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
 
+/**
+ * Controller class of the main window of the Application.
+ */
 public class WindowController implements Initializable {
     private static final int LIST_ITEM_HEIGHT = 25;
     private static final int LIST_WIDTH = 40;
