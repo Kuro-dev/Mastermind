@@ -5,6 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import mastermind.game.color.ColorCell;
 import mastermind.game.color.ColorField;
@@ -41,12 +42,17 @@ public class WindowController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initGame();
+        buttonSubmit.setOnAction(new SubmissionHandler(game));
+        tableSubmissions.getParent().getScene().setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                buttonSubmit.fire();
+            }
+        });
     }
 
     private void initGame() {
         masterColourBox.setVisible(game.isGameOver());
         SubmissionHandler.buildDialog(ROWS);
-        buttonSubmit.setOnAction(new SubmissionHandler(game));
         game.generateNew();
         masterColourBox.getChildren().setAll(ColorField.parseFields(game.getCombination()));
         prepareTableView();
