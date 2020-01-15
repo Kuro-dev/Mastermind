@@ -45,7 +45,7 @@ public class Result {
             }
         }
     }
-    
+
     private boolean colorWasNotMatchedBefore(Pin comparePin, ArrayList<Pin> matchedColors) {
         return matchedColors.stream().noneMatch(pin -> pin.getColor().matches(comparePin.getColor()));
     }
