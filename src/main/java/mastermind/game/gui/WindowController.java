@@ -37,10 +37,6 @@ public class WindowController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        initGame();
-    }
-
-    private void initGame() {
         masterColourBox.setVisible(game.isGameOver());
         SubmissionHandler.buildDialog(rows);
         buttonSubmit.setOnAction(new SubmissionHandler(rows, game));
@@ -48,7 +44,6 @@ public class WindowController implements Initializable {
         masterColourBox.getChildren().setAll(ColorField.parseFields(game.getCombination()));
         prepareTableView();
     }
-
 
     private void prepareTableView() {
         for (int i = 0; i < rows; i++) {
