@@ -11,7 +11,7 @@ public enum Color {
 
     static Color getRandom() {
         final Random random = new Random();
-        Color[] colors = Color.values();
+        final Color[] colors = Color.values();
         int pick = random.nextInt(colors.length);
         return colors[pick];
     }
