@@ -23,10 +23,10 @@ import java.util.ResourceBundle;
 public class WindowController implements Initializable {
     private static final int LIST_ITEM_HEIGHT = 25;
     private static final int LIST_WIDTH = 40;
+    private static final int COLUMNS = 15;
+    private static final int ROWS = 4;
 
-    private final int columns = 15;
-    private final int rows = 4;
-    private final Mastermind game = new Mastermind(rows, columns);
+    private final Mastermind game = new Mastermind(ROWS, COLUMNS);
     private final LinkedList<ListView<ReflectiveImage>> colorTables = new LinkedList<>();
     private final ListView<ReflectiveImage> resultTable = new ListView<>();
     @FXML
@@ -45,7 +45,7 @@ public class WindowController implements Initializable {
 
     private void initGame() {
         masterColourBox.setVisible(game.isGameOver());
-        SubmissionHandler.buildDialog(rows);
+        SubmissionHandler.buildDialog(ROWS);
         buttonSubmit.setOnAction(new SubmissionHandler(game));
         game.generateNew();
         masterColourBox.getChildren().setAll(ColorField.parseFields(game.getCombination()));
@@ -53,7 +53,7 @@ public class WindowController implements Initializable {
     }
 
     private void prepareTableView() {
-        for (int i = 0; i < rows; i++) {
+        for (int i = 0; i < ROWS; i++) {
             final ListView<ReflectiveImage> outputView = new ListView<>();
             outputView.setPrefWidth(LIST_WIDTH);
             basicSetup(outputView);
@@ -79,7 +79,7 @@ public class WindowController implements Initializable {
     public void update(Result result, ColorField[] fields) {
         masterColourBox.setVisible(game.isGameOver());
         buttonSubmit.setDisable(game.isGameOver());
-        turnLabel.setText("Turn " + game.getTurn() + " of " + columns);
+        turnLabel.setText("Turn " + game.getTurn() + " of " + COLUMNS);
         ResultConverter converter = new ResultConverter(result);
         converter.write();
         for (int i = 0; i < colorTables.size(); i++) {
