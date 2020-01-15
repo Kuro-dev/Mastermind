@@ -8,6 +8,13 @@ import mastermind.game.color.ColorCell;
 import mastermind.game.gui.resulthandling.exceptions.NoEmptySpaceException;
 import mastermind.game.logic.check.Result;
 
+/**
+ * Used to convert the return values of the {@link Result}
+ * to visible gui elements.
+ *
+ * @implNote invoke {@link #write()} before using {@link #getImage()}.
+ * Otherwise the image will be blank.
+ */
 public class ResultConverter extends ColorCell implements ReflectiveImage {
     private static final int SQUARE_SIZE = 20;
     private final int matchingPins;
@@ -22,6 +29,7 @@ public class ResultConverter extends ColorCell implements ReflectiveImage {
 
     /**
      * Must be invoked before getting the image.
+     * Writes the actual images pixels.
      */
     public void write() {
         final Color colorMatch = Color.BLACK;

@@ -4,6 +4,10 @@ import mastermind.game.logic.pin.Pin;
 
 import java.util.ArrayList;
 
+/**
+ * A Result is used to compare whether two given pin arrays match or not.
+ * use {@link #compare()} to evaluate before using any getter method.
+ */
 public class Result {
     private final Pin[] originalPins;
     private final Pin[] comparePins;

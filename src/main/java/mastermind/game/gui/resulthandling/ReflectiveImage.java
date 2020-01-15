@@ -1,10 +1,14 @@
 package mastermind.game.gui.resulthandling;
 
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import mastermind.game.gui.WindowController;
 
+/**
+ * Root interface for all Gui used logic-components.
+ */
 public interface ReflectiveImage {
 
+    /**
+     * @return The image to be displayed inside the a ListView.
+     */
     Image getImage();
 }

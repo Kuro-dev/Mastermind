@@ -3,9 +3,6 @@ package mastermind.game.gui.dialog;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DialogPane;
-import javafx.scene.control.ListCell;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
@@ -17,6 +14,10 @@ import mastermind.game.logic.pin.Pin;
 
 import java.util.ArrayList;
 
+/**
+ * This is the Factory object of the Color picker popup
+ * for submitting possible solutions to the game.
+ */
 public class DialogFactory implements Callback<ButtonType, ColorField[]> {
     private final int rows;
     private final ArrayList<ComboBox<ReflectiveImage>> comboBoxes = new ArrayList<>();
@@ -34,6 +35,11 @@ public class DialogFactory implements Callback<ButtonType, ColorField[]> {
         return list;
     }
 
+    /**
+     * @return A prebuilt DialogPane for use in an {@link javafx.scene.control.Dialog Dialog} instance.
+     * @implNote Make sure to set the object as the Dialogs
+     * {@link javafx.scene.control.Dialog#setResultConverter(Callback) resultConverter}
+     */
     public DialogPane createDialog() {
         final DialogPane dialogPane = new DialogPane();
         dialogPane.getButtonTypes().add(ButtonType.CANCEL);
@@ -56,7 +62,6 @@ public class DialogFactory implements Callback<ButtonType, ColorField[]> {
         }
         return dialogPane;
     }
-
 
 
     @Override
