@@ -32,19 +32,20 @@ public class Result {
             if (originalPins[i].equals(comparePins[i])) {
                 matchedPins.add(originalPins[i]);
                 matchingPins++;
-            } else {
-                totalMatch = false;
-                for (Pin pin : originalPins) {
-                    if (comparePins[i].equals(pin) && colorWasNotMatchedBefore(comparePins[i], matchedColors)&& !matchedPins.contains(pin)) {
-                        matchedColors.add(pin);
-                        matchingColours++;
-                        break;
-                    }
+            }
+            totalMatch = false;
+        }
+        for (int i = 0; i < originalPins.length; i++) {
+            for (Pin pin : originalPins) {
+                if (comparePins[i].equals(pin) && colorWasNotMatchedBefore(comparePins[i], matchedColors) && !matchedPins.contains(pin)) {
+                    matchedColors.add(pin);
+                    matchingColours++;
+                    break;
                 }
             }
         }
     }
-
+    
     private boolean colorWasNotMatchedBefore(Pin comparePin, ArrayList<Pin> matchedColors) {
         return matchedColors.stream().noneMatch(pin -> pin.getColor().matches(comparePin.getColor()));
     }
