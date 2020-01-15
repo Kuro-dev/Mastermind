@@ -32,8 +32,9 @@ public class Result {
             if (originalPins[i].equals(comparePins[i])) {
                 matchedPins.add(originalPins[i]);
                 matchingPins++;
+            } else {
+                totalMatch = false;
             }
-            totalMatch = false;
         }
         for (int i = 0; i < originalPins.length; i++) {
             for (Pin pin : originalPins) {
