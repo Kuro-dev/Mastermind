@@ -24,6 +24,9 @@ public class Result {
         this.comparePins = comparePins;
     }
 
+    /**
+     * Evaluates the given pin arrays and stores the result.
+     */
     public void compare() {
         final ArrayList<Pin> matchedPins = new ArrayList<>();
         final ArrayList<Pin> matchedColors = new ArrayList<>();
