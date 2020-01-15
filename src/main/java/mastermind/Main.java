@@ -26,6 +26,4 @@ public class Main extends Application {
         stage.setTitle("Mastermind");
         stage.show();
     }
-
-
 }
