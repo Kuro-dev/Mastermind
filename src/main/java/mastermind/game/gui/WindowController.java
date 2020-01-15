@@ -43,11 +43,6 @@ public class WindowController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initGame();
         buttonSubmit.setOnAction(new SubmissionHandler(game));
-        tableSubmissions.getParent().getScene().setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ENTER) {
-                buttonSubmit.fire();
-            }
-        });
     }
 
     private void initGame() {
