@@ -21,7 +21,7 @@ public class Pin {
         return "Pin." + color;
     }
 
-    public boolean equals(Pin anotherPin) {
+    public boolean sameColor(Pin anotherPin) {
         return color == anotherPin.color;
     }
 }

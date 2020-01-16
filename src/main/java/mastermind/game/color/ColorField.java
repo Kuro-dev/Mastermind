@@ -7,8 +7,8 @@ import javafx.scene.paint.Color;
 import mastermind.game.gui.resulthandling.ReflectiveImage;
 import mastermind.game.logic.pin.Pin;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * List cell for usage in the GUI. Shows a single Colored square of the respective pins colour.
@@ -36,7 +36,7 @@ public class ColorField implements ReflectiveImage {
      * @param pins The pins
      * @return a 50x50 pixel image representing the pins.
      */
-    public static ImageView[] parseFields(ArrayList<Pin> pins) {
+    public static ImageView[] parseFields(List<Pin> pins) {
         final LinkedList<ImageView> images = new LinkedList<>();
         for (Pin pin : pins) {
             images.add(new ImageView(new ColorField(pin).getImage()));
@@ -50,7 +50,7 @@ public class ColorField implements ReflectiveImage {
      * @param height height of the output image in pixels
      * @return The colorFields representing the pins.
      */
-    public static ColorField[] parseFields(ArrayList<Pin> pins, int width, int height) {
+    public static ColorField[] parseFields(List<Pin> pins, int width, int height) {
         final LinkedList<ColorField> images = new LinkedList<>();
         for (Pin pin : pins) {
             images.add(new ColorField(pin, width, height));

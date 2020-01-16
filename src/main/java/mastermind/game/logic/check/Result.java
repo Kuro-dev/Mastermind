@@ -9,23 +9,23 @@ import java.util.ArrayList;
  * use {@link #compare()} to evaluate before using any getter method.
  */
 public class Result {
-    private final Pin[] originalPins;
-    private final Pin[] comparePins;
+    private final Pin[] masterPins;
+    private final Pin[] submittedPins;
     private int matchingColours = 0;
     private int matchingPins = 0;
     private boolean totalMatch;
 
     /**
-     * @param originalPins The original Pins of the masterMind
-     * @param comparePins  The guess of the pins.
+     * @param masterPins The original Pins of the masterMind
+     * @param submittedPins  The guess of the pins.
      * @throws IllegalArgumentException if the original pins and the compare pins arrays are not of matching sizes.
      */
-    public Result(Pin[] originalPins, Pin[] comparePins) {
-        if (originalPins.length != comparePins.length) {
+    public Result(Pin[] masterPins, Pin[] submittedPins) {
+        if (masterPins.length != submittedPins.length) {
             throw new IllegalArgumentException("Not matching amounts of pins");
         }
-        this.originalPins = originalPins;
-        this.comparePins = comparePins;
+        this.masterPins = masterPins;
+        this.submittedPins = submittedPins;
     }
 
     /**
@@ -34,21 +34,21 @@ public class Result {
     public void compare() {
         final ArrayList<Pin> matchedPins = new ArrayList<>();
         totalMatch = true;
-        for (int i = 0; i < originalPins.length; i++) {
-            if (originalPins[i].equals(comparePins[i])) {
-                matchedPins.add(originalPins[i]);
+        for (int i = 0; i < masterPins.length; i++) {
+            if (masterPins[i].sameColor(submittedPins[i])) {
+                matchedPins.add(submittedPins[i]);
                 matchingPins++;
             } else {
                 totalMatch = false;
             }
         }
         final ArrayList<Pin> matchedColors = new ArrayList<>();
-        for (int i = 0; i < originalPins.length; i++) {
-            for (Pin pin : originalPins) {
-                if (comparePins[i].equals(pin) &&
-                        colorWasNotMatchedBefore(comparePins[i], matchedColors)
-                        && !matchedPins.contains(pin)) {
-                    matchedColors.add(pin);
+        for (Pin master : masterPins) {
+            for (Pin compare : submittedPins) {
+                if (compare.sameColor(master) &&
+                        !matchedPins.contains(compare) &&
+                        pinWasNotMatchedBefore(compare, matchedColors)) {
+                    matchedColors.add(compare);
                     matchingColours++;
                     break;
                 }
@@ -56,8 +56,8 @@ public class Result {
         }
     }
 
-    private boolean colorWasNotMatchedBefore(Pin comparePin, ArrayList<Pin> matchedColors) {
-        return matchedColors.stream().noneMatch(pin -> pin.getColor().matches(comparePin.getColor()));
+    private boolean pinWasNotMatchedBefore(Pin comparePin, ArrayList<Pin> matchedColors) {
+        return matchedColors.stream().noneMatch(pin -> pin.equals(comparePin));
     }
 
     public boolean isTotalMatch() {

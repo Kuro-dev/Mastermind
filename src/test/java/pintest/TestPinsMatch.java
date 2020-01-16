@@ -8,12 +8,16 @@ import org.junit.jupiter.api.Test;
 
 public class TestPinsMatch {
     private static Result getResult() {
-        final Pin blue = new Pin(Color.BLUE);
-        final Pin black = new Pin(Color.BLACK);
-        final Pin red = new Pin(Color.RED);
-        final Pin white = new Pin(Color.WHITE);
-        final Pin[] originalPins = new Pin[]{blue, red, red, white};
-        final Pin[] comparePins = new Pin[]{black, red, red, blue};
+        final Pin[] originalPins = new Pin[]{
+                new Pin(Color.BLUE),
+                new Pin(Color.RED),
+                new Pin(Color.RED),
+                new Pin(Color.WHITE)};
+        final Pin[] comparePins = new Pin[]{
+                new Pin(Color.BLACK),
+                new Pin(Color.RED),
+                new Pin(Color.RED),
+                new Pin(Color.BLUE)};
         return new Result(originalPins, comparePins);
     }
 
@@ -21,14 +25,14 @@ public class TestPinsMatch {
     public void testPinsOfSameColourWillMatch() {
         final Pin pin1 = new Pin(Color.BLACK);
         final Pin pin2 = new Pin(Color.BLACK);
-        Assertions.assertTrue(pin1.equals(pin2));
+        Assertions.assertTrue(pin1.sameColor(pin2));
     }
 
     @Test
     public void testPinsOfDifferentColourWillNotMatch() {
         final Pin pin1 = new Pin(Color.BLACK);
         final Pin pin2 = new Pin(Color.BLUE);
-        Assertions.assertFalse(pin1.equals(pin2));
+        Assertions.assertFalse(pin1.sameColor(pin2));
     }
 
     @Test
@@ -47,12 +51,16 @@ public class TestPinsMatch {
 
     @Test
     public void testResultIsTotalMatch() {
-        final Pin blue = new Pin(Color.BLUE);
-        final Pin black = new Pin(Color.BLACK);
-        final Pin red = new Pin(Color.RED);
-        final Pin white = new Pin(Color.WHITE);
-        final Pin[] originalPins = new Pin[]{blue, red, red, white};
-        final Pin[] comparePins = new Pin[]{blue, red, red, white};
+        final Pin[] originalPins = new Pin[]{
+                new Pin(Color.BLUE),
+                new Pin(Color.RED),
+                new Pin(Color.RED),
+                new Pin(Color.WHITE)};
+        final Pin[] comparePins = new Pin[]{
+                new Pin(Color.BLUE),
+                new Pin(Color.RED),
+                new Pin(Color.RED),
+                new Pin(Color.WHITE)};
         final Result result = new Result(originalPins, comparePins);
         result.compare();
         Assertions.assertTrue(result.isTotalMatch());
@@ -68,11 +76,16 @@ public class TestPinsMatch {
     @Test
     // FIXME: 16/01/2020 this test case will not be solved right when used in GUI. Matching colors will be "1" in Gui
     public void testResultEdgeCaseWhenMismatchedPositionComesBeforeMatchingPin() {
-        final Pin blue = new Pin(Color.BLUE);
-        final Pin red = new Pin(Color.RED);
-        final Pin white = new Pin(Color.WHITE);
-        final Pin[] originalPins = new Pin[]{red, red, blue, blue};
-        final Pin[] comparePins = new Pin[]{white, red, white, white};
+        final Pin[] originalPins = new Pin[]{
+                new Pin(Color.RED),
+                new Pin(Color.RED),
+                new Pin(Color.BLUE),
+                new Pin(Color.BLUE)};
+        final Pin[] comparePins = new Pin[]{
+                new Pin(Color.WHITE),
+                new Pin(Color.RED),
+                new Pin(Color.WHITE),
+                new Pin(Color.WHITE)};
         final Result result = new Result(originalPins, comparePins);
         result.compare();
         Assertions.assertEquals(1, result.getMatchingPins());

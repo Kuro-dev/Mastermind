@@ -70,7 +70,7 @@ public class Mastermind {
      * @see #submit(Pin...)
      */
     public Result submit(ColorField... fields) {
-        ArrayList<Pin> list = new ArrayList<>();
+        List<Pin> list = new LinkedList<>();
         for (ColorField field : fields) {
             list.add(field.getPin());
         }

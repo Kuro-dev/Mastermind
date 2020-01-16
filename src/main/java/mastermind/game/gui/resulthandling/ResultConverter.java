@@ -18,12 +18,12 @@ import mastermind.game.logic.check.Result;
 public class ResultConverter extends ColorCell implements ReflectiveImage {
     private static final int SQUARE_SIZE = 20;
     private final int matchingPins;
-    private final int matchingColours;
+    private final int matchingColors;
 
     private WritableImage image = new WritableImage(100, SQUARE_SIZE);
 
     public ResultConverter(Result result) {
-        matchingColours = result.getMatchingColours();
+        matchingColors = result.getMatchingColours();
         matchingPins = result.getMatchingPins();
     }
 
@@ -37,7 +37,7 @@ public class ResultConverter extends ColorCell implements ReflectiveImage {
         for (int i = 0; i < matchingPins; i++) {
             writePixel(pinMatch);
         }
-        for (int i = 0; i < matchingColours; i++) {
+        for (int i = 0; i < matchingColors; i++) {
             writePixel(colorMatch);
         }
     }
