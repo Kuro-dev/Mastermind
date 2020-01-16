@@ -5,7 +5,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import mastermind.game.color.ColorCell;
 import mastermind.game.color.ColorField;
@@ -13,9 +12,12 @@ import mastermind.game.gui.resulthandling.ReflectiveImage;
 import mastermind.game.gui.resulthandling.ResultConverter;
 import mastermind.game.logic.Mastermind;
 import mastermind.game.logic.check.Result;
+import mastermind.game.logic.pin.Color;
+import mastermind.game.logic.pin.Pin;
 
 import java.net.URL;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -98,5 +100,18 @@ public class WindowController implements Initializable {
         tableSubmissions.getChildren().clear();
         resultTable.getItems().clear();
         initGame();
+    }
+
+    public void setCombination(List<String> raw) {
+        if (raw.size() == ROWS) {
+            final LinkedList<Pin> list = new LinkedList<>();
+            for (String string : raw) {
+                list.add(new Pin(Color.parseColor(string)));
+            }
+            game.generateNew(list);
+        } else {
+            System.err.println("Not matching argument size, Expected: "
+                    + ROWS + " Actual: " + raw.size());
+        }
     }
 }

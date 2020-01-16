@@ -5,6 +5,8 @@ import mastermind.game.logic.check.Result;
 import mastermind.game.logic.pin.Pin;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * The actual game. Instantiate this and invoke the {@link #generateNew()} to initialize a new game
@@ -28,16 +30,27 @@ public class Mastermind {
     }
 
     /**
+     * Generates a new game with the given combination
+     *
+     * @param combination The new combination
+     */
+    public void generateNew(List<Pin> combination) {
+        gameOver = false;
+        previousSubmissions.clear();
+        this.combination.clear();
+        this.combination.addAll(combination);
+        System.err.println("Creating new game with combination: " + combination);
+    }
+
+    /**
      * Generates a new random order
      */
     public void generateNew() {
-        gameOver = false;
-        previousSubmissions.clear();
-        combination.clear();
+        LinkedList<Pin> combination = new LinkedList<>();
         for (int i = 0; i < rows; i++) {
             combination.add(i, new Pin());
         }
-        System.err.println("Creating new game with combination: " + combination);
+        generateNew(combination);
     }
 
     /**
@@ -79,5 +92,4 @@ public class Mastermind {
     public int getTurn() {
         return previousSubmissions.size();
     }
-
 }

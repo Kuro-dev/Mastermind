@@ -18,4 +18,13 @@ public enum Color {
         int pick = random.nextInt(colors.length);
         return colors[pick];
     }
+
+    public static Color parseColor(String string) {
+        for (Color color : Color.values()) {
+            if (string.toUpperCase().equals(color.name())) {
+                return color;
+            }
+        }
+        throw new IllegalArgumentException("Could not find color");
+    }
 }
