@@ -39,7 +39,7 @@ public class Mastermind {
         previousSubmissions.clear();
         this.combination.clear();
         this.combination.addAll(combination);
-        System.err.println("Creating new game with combination: " + combination);
+        System.out.println("Creating new game with combination: " + combination);
     }
 
     /**

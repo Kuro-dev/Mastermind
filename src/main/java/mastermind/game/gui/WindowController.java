@@ -50,7 +50,6 @@ public class WindowController implements Initializable {
     private void initGame() {
         masterColourBox.setVisible(game.isGameOver());
         SubmissionHandler.buildDialog(ROWS);
-        game.generateNew();
         masterColourBox.getChildren().setAll(ColorField.parseFields(game.getCombination()));
         prepareTableView();
     }
@@ -102,16 +101,25 @@ public class WindowController implements Initializable {
         initGame();
     }
 
-    public void setCombination(List<String> raw) {
-        if (raw.size() == ROWS) {
+    /**
+     * Used to parse the given arguments into a fixed combination for debugging.
+     * Example: <code>RED RED BLUE BLUE</code>
+     * <p>If no arguments are set the game will start with a random combination.</p>
+     * <p>If not a matching amount of arguments is set the game will start with a random combination</p>
+     *
+     * @param args Arguments
+     * @implNote <b>Not</b> case sensitive
+     */
+    public void setCombination(List<String> args) {
+        if (args.size() == ROWS) {
             final LinkedList<Pin> list = new LinkedList<>();
-            for (String string : raw) {
+            for (String string : args) {
                 list.add(new Pin(Color.parseColor(string)));
             }
             game.generateNew(list);
         } else {
-            System.err.println("Not matching argument size, Expected: "
-                    + ROWS + " Actual: " + raw.size());
+            System.out.println("Generating random combination");
+            game.generateNew();
         }
     }
 }
