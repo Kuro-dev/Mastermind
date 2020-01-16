@@ -108,7 +108,7 @@ public class WindowController implements Initializable {
      * <p>If no arguments are set the game will start with a random combination.</p>
      * <p>If not a matching amount of arguments is set the game will start with a random combination</p>
      *
-     * @param args Arguments
+     * @param params Arguments
      * @implNote <b>Not</b> case sensitive
      */
     public void setCombination(Application.Parameters params) {
