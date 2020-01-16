@@ -18,7 +18,7 @@ public class Pin {
 
     @Override
     public String toString() {
-        return "Pin: " + color;
+        return "Pin." + color;
     }
 
     public boolean equals(Pin anotherPin) {
