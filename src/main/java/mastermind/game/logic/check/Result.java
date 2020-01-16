@@ -45,7 +45,9 @@ public class Result {
         }
         for (int i = 0; i < originalPins.length; i++) {
             for (Pin pin : originalPins) {
-                if (comparePins[i].equals(pin) && colorWasNotMatchedBefore(comparePins[i], matchedColors) && !matchedPins.contains(pin)) {
+                if (comparePins[i].equals(pin) &&
+                        colorWasNotMatchedBefore(comparePins[i], matchedColors)
+                        && !matchedPins.contains(pin)) {
                     matchedColors.add(pin);
                     matchingColours++;
                     break;
