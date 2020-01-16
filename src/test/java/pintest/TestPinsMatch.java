@@ -65,6 +65,7 @@ public class TestPinsMatch {
         Assertions.assertFalse(result.isTotalMatch());
     }
 
+    //TODO this test case will not be solved right when used in GUI
     @Test
     public void testResultEdgeCaseWhenMismatchedPositionComesBeforeMatchingPin() {
         final Pin blue = new Pin(Color.BLUE);
@@ -79,18 +80,4 @@ public class TestPinsMatch {
         Assertions.assertEquals(0, result.getMatchingColours());
     }
 
-    //TODO this test case will not be solved right when used in GUI
-    @Test
-    public void testEdgeCaseRedGreenGreenYellow() {
-        final Pin blue = new Pin(Color.BLUE);
-        final Pin black = new Pin(Color.BLACK);
-        final Pin red = new Pin(Color.RED);
-        final Pin white = new Pin(Color.WHITE);
-        final Pin[] originalPins = new Pin[]{blue, blue, red, black};
-        final Pin[] comparePins = new Pin[]{white, blue, white, white};
-        final Result result = new Result(originalPins, comparePins);
-        result.compare();
-        Assertions.assertEquals(1, result.getMatchingPins());
-        Assertions.assertEquals(0, result.getMatchingColours());
-    }
 }
