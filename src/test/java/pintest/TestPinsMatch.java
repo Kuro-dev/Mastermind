@@ -65,7 +65,7 @@ public class TestPinsMatch {
         Assertions.assertFalse(result.isTotalMatch());
     }
 
-    //TODO this test case will not be solved right when used in GUI Matching colors will be "1" in Gui
+    //TODO this test case will not be solved right when used in GUI. Matching colors will be "1" in Gui
     @Test
     public void testResultEdgeCaseWhenMismatchedPositionComesBeforeMatchingPin() {
         final Pin blue = new Pin(Color.BLUE);
