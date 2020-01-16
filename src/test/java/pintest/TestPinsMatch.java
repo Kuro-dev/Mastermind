@@ -69,11 +69,10 @@ public class TestPinsMatch {
     // FIXME: 16/01/2020 this test case will not be solved right when used in GUI. Matching colors will be "1" in Gui
     public void testResultEdgeCaseWhenMismatchedPositionComesBeforeMatchingPin() {
         final Pin blue = new Pin(Color.BLUE);
-        final Pin black = new Pin(Color.BLACK);
         final Pin red = new Pin(Color.RED);
         final Pin white = new Pin(Color.WHITE);
-        final Pin[] originalPins = new Pin[]{black, red, white, white};
-        final Pin[] comparePins = new Pin[]{red, red, blue, blue};
+        final Pin[] originalPins = new Pin[]{red, red, blue, blue};
+        final Pin[] comparePins = new Pin[]{white, red, white, white};
         final Result result = new Result(originalPins, comparePins);
         result.compare();
         Assertions.assertEquals(1, result.getMatchingPins());
