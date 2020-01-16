@@ -23,7 +23,7 @@ public class Main extends Application {
         final FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/mainwindow.fxml"));
         final Scene scene = new Scene(loader.load());
         mainWindow = loader.getController();
-        mainWindow.setCombination(getParameters().getRaw());
+        mainWindow.setCombination(getParameters());
         stage.setScene(scene);
         stage.setTitle("Mastermind");
         stage.show();

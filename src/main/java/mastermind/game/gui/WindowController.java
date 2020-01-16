@@ -1,5 +1,6 @@
 package mastermind.game.gui;
 
+import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -110,7 +111,8 @@ public class WindowController implements Initializable {
      * @param args Arguments
      * @implNote <b>Not</b> case sensitive
      */
-    public void setCombination(List<String> args) {
+    public void setCombination(Application.Parameters params) {
+        final List<String> args = params.getUnnamed();
         if (args.size() == ROWS) {
             final LinkedList<Pin> list = new LinkedList<>();
             for (String string : args) {
