@@ -33,7 +33,6 @@ public class Result {
      */
     public void compare() {
         final ArrayList<Pin> matchedPins = new ArrayList<>();
-        final ArrayList<Pin> matchedColors = new ArrayList<>();
         totalMatch = true;
         for (int i = 0; i < originalPins.length; i++) {
             if (originalPins[i].equals(comparePins[i])) {
@@ -43,6 +42,7 @@ public class Result {
                 totalMatch = false;
             }
         }
+        final ArrayList<Pin> matchedColors = new ArrayList<>();
         for (int i = 0; i < originalPins.length; i++) {
             for (Pin pin : originalPins) {
                 if (comparePins[i].equals(pin) &&
