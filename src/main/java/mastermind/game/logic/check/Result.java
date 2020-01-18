@@ -16,8 +16,8 @@ public class Result {
     private boolean totalMatch;
 
     /**
-     * @param masterPins The original Pins of the masterMind
-     * @param submittedPins  The guess of the pins.
+     * @param masterPins    The original Pins of the masterMind
+     * @param submittedPins The guess of the pins.
      * @throws IllegalArgumentException if the original pins and the compare pins arrays are not of matching sizes.
      */
     public Result(Pin[] masterPins, Pin[] submittedPins) {
@@ -37,6 +37,7 @@ public class Result {
         for (int i = 0; i < masterPins.length; i++) {
             if (masterPins[i].sameColor(submittedPins[i])) {
                 matchedPins.add(submittedPins[i]);
+                matchedPins.add(masterPins[i]);
                 matchingPins++;
             } else {
                 totalMatch = false;
@@ -47,6 +48,7 @@ public class Result {
             for (Pin compare : submittedPins) {
                 if (compare.sameColor(master) &&
                         !matchedPins.contains(compare) &&
+                        !matchedPins.contains(master) &&
                         pinWasNotMatchedBefore(compare, matchedColors)) {
                     matchedColors.add(compare);
                     matchingColours++;

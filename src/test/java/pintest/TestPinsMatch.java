@@ -74,7 +74,6 @@ public class TestPinsMatch {
     }
 
     @Test
-    // FIXME: 16/01/2020 this test case will not be solved right when used in GUI. Matching colors will be "1" in Gui
     public void testResultEdgeCaseWhenMismatchedPositionComesBeforeMatchingPin() {
         final Pin[] originalPins = new Pin[]{
                 new Pin(Color.RED),

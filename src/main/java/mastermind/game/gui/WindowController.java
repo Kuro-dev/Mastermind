@@ -99,6 +99,7 @@ public class WindowController implements Initializable {
         colorTables.clear();
         tableSubmissions.getChildren().clear();
         resultTable.getItems().clear();
+        game.generateNew();
         initGame();
     }
 
