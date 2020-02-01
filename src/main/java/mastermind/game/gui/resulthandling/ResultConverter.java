@@ -5,6 +5,7 @@ import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 import mastermind.game.color.ColorCell;
+import mastermind.game.gui.WindowController;
 import mastermind.game.gui.resulthandling.exceptions.NoEmptySpaceException;
 import mastermind.game.logic.check.Result;
 
@@ -37,8 +38,10 @@ public class ResultConverter extends ColorCell implements ReflectiveImage {
         for (int i = 0; i < matchingPins; i++) {
             writePixel(pinMatch);
         }
-        for (int i = 0; i < matchingColors; i++) {
-            writePixel(colorMatch);
+        if (!WindowController.HARD_MODE) {
+            for (int i = 0; i < matchingColors; i++) {
+                writePixel(colorMatch);
+            }
         }
     }
 

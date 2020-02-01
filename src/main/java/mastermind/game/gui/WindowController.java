@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
+import mastermind.Main;
 import mastermind.game.color.ColorCell;
 import mastermind.game.color.ColorField;
 import mastermind.game.gui.resulthandling.ReflectiveImage;
@@ -15,6 +16,7 @@ import mastermind.game.logic.Mastermind;
 import mastermind.game.logic.check.Result;
 import mastermind.game.logic.pin.Color;
 import mastermind.game.logic.pin.Pin;
+import mastermind.game.logic.settings.Setting;
 
 import java.net.URL;
 import java.util.LinkedList;
@@ -25,11 +27,11 @@ import java.util.ResourceBundle;
  * Controller class of the main window of the Application.
  */
 public class WindowController implements Initializable {
+    public static final boolean HARD_MODE = Boolean.parseBoolean(Main.getConfig().get(Setting.HARDMODE));
     private static final int LIST_ITEM_HEIGHT = 25;
     private static final int LIST_WIDTH = 40;
-    private static final int COLUMNS = 15;
-    private static final int ROWS = 4;
-
+    private static final int COLUMNS = Integer.parseInt(Main.getConfig().get(Setting.COLUMNS));
+    private static final int ROWS = Integer.parseInt(Main.getConfig().get(Setting.ROWS));
     private final Mastermind game = new Mastermind(ROWS, COLUMNS);
     private final LinkedList<ListView<ReflectiveImage>> colorTables = new LinkedList<>();
     private final ListView<ReflectiveImage> resultTable = new ListView<>();
@@ -44,6 +46,7 @@ public class WindowController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        System.err.println("Hard mode = " + HARD_MODE);
         initGame();
         buttonSubmit.setOnAction(new SubmissionHandler(game));
     }
