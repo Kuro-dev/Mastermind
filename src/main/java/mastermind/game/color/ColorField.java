@@ -72,9 +72,9 @@ public class ColorField implements ReflectiveImage {
                 //The border
                 image.getPixelWriter().setColor(0, y, Color.BLACK);
                 image.getPixelWriter().setColor((width - 1), y, Color.BLACK);
-                image.getPixelWriter().setColor(x, 0, Color.BLACK);
-                image.getPixelWriter().setColor(x, (height - 1), Color.BLACK);
             }
+            image.getPixelWriter().setColor(x, 0, Color.BLACK);
+            image.getPixelWriter().setColor(x, (height - 1), Color.BLACK);
         }
         return image;
     }
