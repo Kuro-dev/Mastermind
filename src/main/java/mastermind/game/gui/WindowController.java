@@ -35,6 +35,9 @@ public class WindowController implements Initializable {
     private final Mastermind game = new Mastermind(ROWS, COLUMNS);
     private final LinkedList<ListView<ReflectiveImage>> colorTables = new LinkedList<>();
     private final ListView<ReflectiveImage> resultTable = new ListView<>();
+    private SubmissionHandler submissionHandler;
+    @FXML
+    private HBox submissionField;
     @FXML
     private Label turnLabel;
     @FXML
@@ -48,14 +51,16 @@ public class WindowController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.err.println("Hard mode = " + HARD_MODE);
         initGame();
-        buttonSubmit.setOnAction(new SubmissionHandler(game));
     }
 
     private void initGame() {
         masterColourBox.setVisible(game.isGameOver());
-        SubmissionHandler.buildDialog(ROWS);
+        submissionHandler = new SubmissionHandler(game, submissionField, ROWS);
+        submissionHandler.reset();
+        buttonSubmit.setOnAction(submissionHandler);
         masterColourBox.getChildren().setAll(ColorField.parseFields(game.getCombination()));
         prepareTableView();
+        turnLabel.setText("Turn 0 of " + COLUMNS);
     }
 
     private void prepareTableView() {

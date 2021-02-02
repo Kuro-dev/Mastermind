@@ -18,6 +18,7 @@ import java.util.ArrayList;
  * This is the Factory object of the Color picker popup
  * for submitting possible solutions to the game.
  */
+@Deprecated
 public class DialogFactory implements Callback<ButtonType, ColorField[]> {
     private final int rows;
     private final ArrayList<ComboBox<ReflectiveImage>> comboBoxes = new ArrayList<>();
