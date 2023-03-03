@@ -1,4 +1,4 @@
-package mastermind.game.logic.pin;
+package org.kurodev.game.mastermind.pin;
 
 public class Pin {
     private final Color color;

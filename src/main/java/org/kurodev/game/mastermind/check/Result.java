@@ -1,6 +1,6 @@
-package mastermind.game.logic.check;
+package org.kurodev.game.mastermind.check;
 
-import mastermind.game.logic.pin.Pin;
+import org.kurodev.game.mastermind.pin.Pin;
 
 import java.util.ArrayList;
 

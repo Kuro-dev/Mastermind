@@ -1,4 +1,4 @@
-package mastermind.game.logic.pin;
+package org.kurodev.game.mastermind.pin;
 
 import java.util.Random;
 

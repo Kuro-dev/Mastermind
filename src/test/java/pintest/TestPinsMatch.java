@@ -1,8 +1,8 @@
 package pintest;
 
-import mastermind.game.logic.check.Result;
-import mastermind.game.logic.pin.Color;
-import mastermind.game.logic.pin.Pin;
+import org.kurodev.game.mastermind.check.Result;
+import org.kurodev.game.mastermind.pin.Color;
+import org.kurodev.game.mastermind.pin.Pin;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

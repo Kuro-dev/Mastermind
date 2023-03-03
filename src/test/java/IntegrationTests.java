@@ -1,6 +1,6 @@
-import mastermind.game.logic.Mastermind;
-import mastermind.game.logic.pin.Color;
-import mastermind.game.logic.pin.Pin;
+import org.kurodev.game.mastermind.Mastermind;
+import org.kurodev.game.mastermind.pin.Color;
+import org.kurodev.game.mastermind.pin.Pin;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
