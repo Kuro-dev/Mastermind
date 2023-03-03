@@ -8,8 +8,8 @@ public class Pin {
         this.color = color;
     }
 
-    public Pin() {
-        this(Color.getRandom());
+    public Pin(Color[] possibleColors) {
+        this(Color.getRandom(possibleColors));
     }
 
     public String getColor() {

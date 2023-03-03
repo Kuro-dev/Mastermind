@@ -31,7 +31,12 @@ public class Result {
     /**
      * Evaluates the given pin arrays and stores the result.
      */
-    public void compare() {
+    public Result compare() {
+        //reset values to default
+        matchingColours = 0;
+        matchingPins = 0;
+        totalMatch = false;
+        //find matches
         final ArrayList<Pin> matchedPins = new ArrayList<>();
         totalMatch = true;
         for (int i = 0; i < masterPins.length; i++) {
@@ -56,20 +61,27 @@ public class Result {
                 }
             }
         }
+        return this;
     }
 
     private boolean pinWasNotMatchedBefore(Pin comparePin, ArrayList<Pin> matchedColors) {
-        return matchedColors.stream().noneMatch(pin -> pin.equals(comparePin));
+        return matchedColors.stream().noneMatch(pin -> pin == comparePin);
     }
 
     public boolean isTotalMatch() {
         return totalMatch;
     }
 
+    /**
+     * @return The number of pins where both color and position are correct
+     */
     public int getMatchingPins() {
         return matchingPins;
     }
 
+    /**
+     * @return The number of pins with the correct colour at the incorrect position
+     */
     public int getMatchingColours() {
         return matchingColours;
     }

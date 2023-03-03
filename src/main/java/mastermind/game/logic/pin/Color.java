@@ -18,12 +18,12 @@ public enum Color {
     ORANGE,
     YELLOW,
     RED;
+    private static Random random;
 
-    static Color getRandom() {
-        final Random random = new Random();
-        final Color[] colors = Color.values();
-        int pick = random.nextInt(colors.length);
-        return colors[pick];
+    static Color getRandom(Color[] possibleColors) {
+        if (random == null) random = new Random();
+        int pick = random.nextInt(possibleColors.length);
+        return possibleColors[pick];
     }
 
     public static Color parseColor(String string) {

@@ -1,12 +1,10 @@
 package mastermind.game.logic;
 
-import mastermind.game.color.ColorField;
 import mastermind.game.logic.check.Result;
+import mastermind.game.logic.pin.Color;
 import mastermind.game.logic.pin.Pin;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * The actual game. Instantiate this and invoke the {@link #generateNew()} to initialize a new game
@@ -14,15 +12,41 @@ import java.util.List;
  */
 public class Mastermind {
     private final int rows;
-    private final int columns;
-    private ArrayList<Pin> combination;
-    private ArrayList<Pin[]> previousSubmissions = new ArrayList<>();
-    private boolean gameOver;
+    private final int tries;
+    private final Color[] colorScheme;
+    private final ArrayList<Pin> combination;
+    private final ArrayList<Pin[]> previousSubmissions = new ArrayList<>();
+    private Boolean won;
 
-    public Mastermind(int rows, int columns) {
+    /**
+     * @param rows   Determines how many different colors will be used
+     * @param tries Determines how many tries a player has
+     */
+    public Mastermind(int rows, int tries) {
+        this(rows, tries, Color.RED, Color.BLUE, Color.GREEN, Color.ORANGE);
+    }
+
+    /**
+     * @param rows   Determines how many different colors will be used
+     * @param tries Determines how many tries a player has
+     * @param color   The colorscheme to be used in the game
+     */
+    public Mastermind(int rows, int tries, Color color, Color... otherColors) {
         combination = new ArrayList<>(rows);
         this.rows = rows;
-        this.columns = columns;
+        this.tries = tries;
+        var temp = new ArrayList<Color>(otherColors.length + 1);
+        temp.add(color);
+        Collections.addAll(temp, otherColors);
+        this.colorScheme = temp.toArray(new Color[0]);
+    }
+
+    public ArrayList<Pin[]> getPreviousSubmissions() {
+        return previousSubmissions;
+    }
+
+    public Color[] getColorScheme() {
+        return colorScheme;
     }
 
     public ArrayList<Pin> getCombination() {
@@ -35,11 +59,10 @@ public class Mastermind {
      * @param combination The new combination
      */
     public void generateNew(List<Pin> combination) {
-        gameOver = false;
+        won = null;
         previousSubmissions.clear();
         this.combination.clear();
         this.combination.addAll(combination);
-        System.out.println("Creating new game with combination: " + combination);
     }
 
     /**
@@ -48,7 +71,7 @@ public class Mastermind {
     public void generateNew() {
         LinkedList<Pin> combination = new LinkedList<>();
         for (int i = 0; i < rows; i++) {
-            combination.add(i, new Pin());
+            combination.add(i, new Pin(colorScheme));
         }
         generateNew(combination);
     }
@@ -56,37 +79,47 @@ public class Mastermind {
     /**
      * used to submit a possible solution to the secret combination
      *
-     * @param pins The pins as array for possible combination.
      * @return A result object containing all evaluated information.
      * @apiNote to actually get usable results the {@link Result#compare()}
      * Method must be invoked before getting the values.
      */
-    public Result submit(Pin... pins) {
-        previousSubmissions.add(pins);
-        return new Result(combination.toArray(new Pin[0]), pins);
+    public Result submit(Collection<Pin> pins) {
+        return submit(pins.toArray(Pin[]::new));
     }
 
     /**
-     * @see #submit(Pin...)
+     * used to submit a possible solution to the secret combination
+     *
+     * @param pins The pins as array for possible combination.
+     * @return A result object containing all evaluated information.
+     * @implNote Will return {@code null} if the game is over
      */
-    public Result submit(ColorField... submission) {
-        List<Pin> list = new LinkedList<>();
-        for (ColorField field : submission) {
-            list.add(field.getPin());
+    public Result submit(Pin... pins) {
+        if (isGameOver()) return null;
+        previousSubmissions.add(pins);
+        var result = new Result(combination.toArray(new Pin[0]), pins).compare();
+        if (result.isTotalMatch()) {
+            setGameWon();
+        } else if (getTurn() >= tries) {
+            setGameLost();
         }
-        return submit(list.toArray(new Pin[0]));
+        return result;
+    }
+
+    private void setGameWon() {
+        this.won = true;
+    }
+
+    private void setGameLost() {
+        this.won = false;
     }
 
     public boolean isGameOver() {
-        if (!gameOver) {
-            gameOver = columns == previousSubmissions.size();
-        }
-        return gameOver;
+        return this.won != null;
     }
 
-    public void setGameOver(boolean gameOver, String message) {
-        this.gameOver = gameOver;
-        System.out.println(message);
+    public boolean isGameWon() {
+        return isGameOver() && this.won;
     }
 
     public int getTurn() {
